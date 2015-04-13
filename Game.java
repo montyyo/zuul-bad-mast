@@ -140,6 +140,10 @@ public class Game
         {
             look();
         }
+        else if(commandWord.equals("eat"))
+        {
+            eat();
+        }
 
         return wantToQuit;
     }
@@ -208,6 +212,11 @@ public class Game
     private void look()
     {
         printLocationInfo();
+    }
+    
+    public void eat()
+    {
+        System.out.println("you have eaten now and you not hungry any more");
     }
     
     private void printLocationInfo()
