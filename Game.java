@@ -37,14 +37,14 @@ public class Game
         Room pasillo, almacen, laboratorio, despacho, banio,corredor,salida,entrada;
       
         // create the rooms
-        entrada = new Room("entrada del juego");
-        salida = new Room("outside the main entrance of the university");
-        almacen = new Room("in a stock");
-        pasillo= new Room("in the outside");
-        laboratorio = new Room("in a computing lab");
-        despacho = new Room("in the computing admin office");
-        banio = new Room("bathroom");
-        corredor = new Room("subway");
+        entrada = new Room("entrada del juego","obj1" , 34F);
+        salida = new Room("outside the main entrance of the university","obj2" , 4F);
+        almacen = new Room("in a stock","obj3" , 3F);
+        pasillo= new Room("in the outside","obj4" , 8F);
+        laboratorio = new Room("in a computing lab","obj5" , 23F);
+        despacho = new Room("in the computing admin office","obj6" , 14F);
+        banio = new Room("bathroom","obj7" , 24F);
+        corredor = new Room("subway","obj8" , 64F);
         // initialise room exits
         //salidas entrada
         entrada.setExit("east", pasillo);
@@ -214,7 +214,7 @@ public class Game
         printLocationInfo();
     }
     
-    public void eat()
+    private void eat()
     {
         System.out.println("you have eaten now and you not hungry any more");
     }
