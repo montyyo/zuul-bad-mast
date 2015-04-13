@@ -47,21 +47,11 @@ public class Room
      * @param south The south exit.
      * @param west The west exit.
      */
-    public void setExits(Room north, Room east, Room south, Room west,Room southEast,Room northEast) 
+
+    
+    public void setExit(String direction , Room nextRoom)
     {
-        if(north != null)
-            exits.put("north",  north);
-        if(east != null)
-            exits.put("east",  east);
-        if(south != null)
-             exits.put("south",  south);
-        if(west != null)
-             exits.put ("west",  west);
-        if(southEast != null)
-             exits.put("southEast", southEast);
-        if(northEast != null)
-             exits.put("northEast", northEast);
-            
+        exits.put(direction,nextRoom);
     }
 
     /**
@@ -76,58 +66,19 @@ public class Room
     {
         //obtencion de los atributos 
         //comparacion de cadenas --> equals
-        Room roomToReturn = null;
-            if(direction.equals("north"))
-            {
-                roomToReturn=exits.get("northExit");
-            }
-            else if(direction.equals("south"))
-            {
-                roomToReturn=exits.get("southExit");
-            }
-             else if(direction.equals("east"))
-            {
-                roomToReturn=exits.get("eastExit");
-            }
-             else if(direction.equals("southEast"))
-            {
-                roomToReturn=exits.get("southEastExit");
-            }
-            else if(direction.equals("northEast"))
-            {
-                roomToReturn=exits.get("northEastExit");
-            }
-        return roomToReturn;
+        
+        return exits.get(direction);
     }
     
     public String getExitString()
     {
-        String exitsDescription="";
+        Set<String> nameOfDirection = exits.keySet();
+        String exitsDescription = "Exit ";
+        for( String direction : nameOfDirection)
+        {
+            exitsDescription += direction + "  " ;
+        }
         
-        if(exits.get("northExit") != null)
-        {
-            exitsDescription += "north";
-        }
-        if(exits.get("southExit") != null)
-        {
-            exitsDescription += "south";
-        }
-        if(exits.get("eastExit") != null)
-        {
-            exitsDescription += "east";
-        }
-        if(exits.get("eastExit") != null)
-        {
-            exitsDescription += "west";
-        }
-        if (exits.get("southEastExit") != null) 
-        {
-            exitsDescription +="southEast";
-        }
-        if (exits.get("northEastExit") != null) 
-        {
-            exitsDescription +="northEast";
-        }
         return exitsDescription;
     }
 }

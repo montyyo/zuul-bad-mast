@@ -34,23 +34,48 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room pasillo, almacen, laboratorio, despacho, banio,corredor,salida,entrada;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        
+        entrada = new Room("entrada del juego");
+        salida = new Room("outside the main entrance of the university");
+        almacen = new Room("in a stock");
+        pasillo= new Room("in the outside");
+        laboratorio = new Room("in a computing lab");
+        despacho = new Room("in the computing admin office");
+        banio = new Room("bathroom");
+        corredor = new Room("subway");
         // initialise room exits
-        outside.setExits(null, theater, lab,null, pub,null);
-        theater.setExits(null, null, null, outside,null,null);
-        pub.setExits(null, outside, null, null,lab,null);
-        lab.setExits(outside, office, null, null, pub, null);
-        office.setExits(null, null, null, lab, pub, outside);
+        //salidas entrada
+        entrada.setExit("east", pasillo);
+        //salidas pasillo
+        pasillo.setExit("north", despacho);
+        pasillo.setExit("east", almacen);
+        pasillo.setExit("west",  entrada);
+        //salidas almacen
+        almacen.setExit("north", laboratorio);
+        almacen.setExit("west", pasillo);
+        //salidas laboratorio
+        laboratorio.setExit("north", banio);
+        laboratorio.setExit("westh", despacho);
+        //salidas despacho
+        despacho.setExit("north",corredor);
+        despacho.setExit("east", laboratorio);
+        despacho.setExit("southeast", almacen);
+        despacho.setExit("south", pasillo);
+        //salidas banio
+        banio.setExit("shouth",  laboratorio);
+        banio.setExit("east", corredor);
+        //salidas corredor
+        corredor.setExit("east" ,banio );
+        corredor.setExit("southeast", despacho);
+        corredor.setExit( "shouth", laboratorio);
+        corredor.setExit("west", salida);
+                
+        //salida salida
+        salida.setExit("east", corredor);
 
-        currentRoom = outside;  // start game outside
+        currentRoom = entrada;  // start game outside
     }
 
     /**
