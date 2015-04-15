@@ -60,6 +60,7 @@ public class Room
     
     public void setExit(String direction , Room nextRoom)
     {
+        
         exits.put(direction,nextRoom);
     }
 

@@ -9,11 +9,13 @@
  * @version 2011.07.31
  */
 
+
+
 public class CommandWords
 {
     // a constant array that holds all valid command words
     private static final String[] validCommands = {
-        "go", "quit", "help", "look","eat"
+        "go", "quit", "help", "look","eat","back"
     };
 
     /**
