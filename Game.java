@@ -177,8 +177,16 @@ public class Game
         }
         else if(commandWord.equals("back"))
         {
-           currentRoom = room.peek();
-           look();
+           if( room.empty()==true)
+           {
+               System.out.println(" NO HAY MAS HABITACIONES SE ENCUENTRA EN EL INICIO DEL JUEGO");
+           }
+           else
+           {
+               currentRoom = room.pop();
+               look();
+           }
+            look();
         }
 
         return wantToQuit;
