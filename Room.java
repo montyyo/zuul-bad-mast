@@ -26,22 +26,28 @@ public class Room
     //     private Room northEastExit;
     
     private HashMap<String, Room> exits;
-    private String item;
-    private float weight;
+   
+    private ArrayList<Item> items;
+    
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description,String item,float weight) 
+    public Room(String description) 
     {
         this.description = description;
-        exits = new HashMap<>();
-        this.item=item;
-        this.weight=weight;
+        this.items=new ArrayList<>();
+       
     }
 
+    public void  addItem(Item item)
+    {
+       
+        items.add(item);
+    }
+    
     /**
      * Define the exits of this room.  Every direction either leads
      * to another room or is null (no exit there).
@@ -85,11 +91,21 @@ public class Room
         return exitsDescription;
     }
     
+    public String showAllItem()
+    {
+        String itemDescription = null;
+        for(Item itemsDesc : items)
+        {
+            itemDescription +=  itemsDesc.toString() + "\n";
+        }
+        return itemDescription;
+    }
+    
     public String getLongDescription()
     {
         String longDescription =  "you are " + description + " .\n" + getExitString()+"\n";
         longDescription += " there is 1 item.\n";
-        longDescription +="  " + item + "  "+ weight +" kg";
+        longDescription +="  " +showAllItem();
         return longDescription;
     }
     

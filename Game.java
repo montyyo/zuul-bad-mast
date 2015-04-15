@@ -37,14 +37,38 @@ public class Game
         Room pasillo, almacen, laboratorio, despacho, banio,corredor,salida,entrada;
       
         // create the rooms
-        entrada = new Room("entrada del juego","obj1" , 34F);
-        salida = new Room("outside the main entrance of the university","obj2" , 4F);
-        almacen = new Room("in a stock","obj3" , 3F);
-        pasillo= new Room("in the outside","obj4" , 8F);
-        laboratorio = new Room("in a computing lab","obj5" , 23F);
-        despacho = new Room("in the computing admin office","obj6" , 14F);
-        banio = new Room("bathroom","obj7" , 24F);
-        corredor = new Room("subway","obj8" , 64F);
+        entrada = new Room("entrada del juego");
+        entrada.addItem(new Item("pergola",23F));
+        entrada.addItem(new Item("papelera",8F));
+        
+        salida = new Room("outside the main entrance of the university");
+        salida.addItem(new Item("tablon",23F));
+        salida.addItem(new Item("rampa",8F));
+        
+        almacen = new Room("in a stock");
+        almacen.addItem(new Item("ropa",34F));
+        almacen.addItem(new Item("maniqui",68F));
+        
+        pasillo= new Room("in the outside");
+        pasillo.addItem(new Item("extintor",9F));
+        pasillo.addItem(new Item("taquilla",8F));
+        
+        laboratorio = new Room("in a computing lab");
+        laboratorio.addItem(new Item("probetas",9F));
+        laboratorio.addItem(new Item("esqueleto",8F));
+        
+        despacho = new Room("in the computing admin office");
+        despacho.addItem(new Item("mapas",9F));
+        despacho.addItem(new Item("PC",8F));
+        
+        banio = new Room("bathroom" );
+        laboratorio.addItem(new Item("probetas",9F));
+        laboratorio.addItem(new Item("esqueleto",8F));
+        
+        corredor = new Room("subway");
+        corredor.addItem(new Item("caja",9F));
+        corredor.addItem(new Item("esqueleto",8F));
+        
         // initialise room exits
         //salidas entrada
         entrada.setExit("east", pasillo);
