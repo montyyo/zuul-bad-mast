@@ -92,4 +92,6 @@ public class Room
         longDescription +="  " + item + "  "+ weight +" kg";
         return longDescription;
     }
+    
+    //0118
 }
