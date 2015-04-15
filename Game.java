@@ -160,7 +160,8 @@ public class Game
             printHelp();
         }
         else if (commandWord.equals("go")) {
-            room.push(currentRoom);
+           
+            
             goRoom(command);
         }
         else if (commandWord.equals("quit")) {
@@ -177,7 +178,7 @@ public class Game
         else if(commandWord.equals("back"))
         {
            currentRoom = room.peek();
-            look();
+           look();
         }
 
         return wantToQuit;
@@ -223,7 +224,9 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            room.push(currentRoom);
             currentRoom = nextRoom;
+            
            printLocationInfo();
         }
     }
