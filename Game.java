@@ -184,7 +184,7 @@ public class Game
            else
            {
                currentRoom = room.pop();
-               look();
+               
            }
             look();
         }
