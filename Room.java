@@ -38,6 +38,7 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
+        this.exits = new HashMap<>();
         this.items=new ArrayList<>();
        
     }
@@ -105,7 +106,7 @@ public class Room
     public String getLongDescription()
     {
         String longDescription =  "you are " + description + " .\n" + getExitString()+"\n";
-        longDescription += " there is 1 item.\n";
+        
         longDescription +="  " +showAllItem();
         return longDescription;
     }

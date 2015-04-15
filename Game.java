@@ -177,6 +177,7 @@ public class Game
         else if(commandWord.equals("back"))
         {
            currentRoom = room.peek();
+            look();
         }
 
         return wantToQuit;
