@@ -27,7 +27,7 @@ public class Game
      */
     public Game() 
     {
-        player = new Player();
+        player = new Player("pedro",0F,50F);
         createRooms();
         parser = new Parser();
         room = new Stack<>();
@@ -183,6 +183,14 @@ public class Game
         {
             player.backRoom();
             player.lookRoom();
+        }
+        else if(commandWord.equals("take"))
+        {
+            player.take();
+        }
+        else if(commandWord.equals("drop"))
+        {
+            player.drop();
         }
 
         return wantToQuit;

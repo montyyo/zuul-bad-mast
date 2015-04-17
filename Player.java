@@ -13,16 +13,33 @@ public class Player
     
     private Room actualRoom;
     private Stack<Room> rooms;
+    private String name;
+    private ArrayList<Item> item;
+    private float carryWeight;
+    private float maxWeight;
     
     /**
      * Constructor for objects of class Player
      */
-    public Player()
+    public Player(String name, float carryWeight, float maxWeight)
     {
+        this.name = name;
+        this.carryWeight=carryWeight;
+        this.maxWeight=maxWeight;
         actualRoom = null;
         rooms = new Stack<>();
     }
 
+   public void take()
+   {
+       
+   }
+   
+   public void drop()
+   {
+       
+   }
+   
     //habitacion actual
    public Room getActualRoom()
    {
