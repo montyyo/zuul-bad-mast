@@ -21,15 +21,17 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> room;
-    
+    private Player player;
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        player = new Player("pedro",0F,50F);
         createRooms();
         parser = new Parser();
         room = new Stack<>();
+        
     }
 
     /**
@@ -41,37 +43,37 @@ public class Game
       
         // create the rooms
         entrada = new Room("entrada del juego");
-        entrada.addItem(new Item("pergola",23F));
-        entrada.addItem(new Item("papelera",8F));
+        entrada.addItem(new Item("pergola",23F,true));
+        entrada.addItem(new Item("papelera",8F,false));
        
         
         salida = new Room("outside the main entrance of the university");
-        salida.addItem(new Item("tablon",23F));
-        salida.addItem(new Item("rampa",8F));
+        salida.addItem(new Item("tablon",23F,true));
+        salida.addItem(new Item("rampa",8F,false));
         
         almacen = new Room("in a stock");
-        almacen.addItem(new Item("ropa",34F));
-        almacen.addItem(new Item("maniqui",68F));
+        almacen.addItem(new Item("ropa",34F,true));
+        almacen.addItem(new Item("maniqui",68F,true));
         
         pasillo= new Room("in the outside");
-        pasillo.addItem(new Item("extintor",9F));
-        pasillo.addItem(new Item("taquilla",8F));
+        pasillo.addItem(new Item("extintor",9F,true));
+        pasillo.addItem(new Item("taquilla",8F,true));
         
         laboratorio = new Room("in a computing lab");
-        laboratorio.addItem(new Item("probetas",9F));
-        laboratorio.addItem(new Item("esqueleto",8F));
+        laboratorio.addItem(new Item("probetas",9F,true));
+        laboratorio.addItem(new Item("esqueleto",8F,false));
         
         despacho = new Room("in the computing admin office");
-        despacho.addItem(new Item("mapas",9F));
-        despacho.addItem(new Item("PC",8F));
+        despacho.addItem(new Item("mapas",9F,false));
+        despacho.addItem(new Item("PC",8F,false));
         
         banio = new Room("bathroom" );
-        laboratorio.addItem(new Item("probetas",9F));
-        laboratorio.addItem(new Item("esqueleto",8F));
+        laboratorio.addItem(new Item("probetas",9F,false));
+        laboratorio.addItem(new Item("esqueleto",8F,true));
         
         corredor = new Room("subway");
-        corredor.addItem(new Item("caja",9F));
-        corredor.addItem(new Item("esqueleto",8F));
+        corredor.addItem(new Item("caja",9F,true));
+        corredor.addItem(new Item("esqueleto",8F,true));
         
         // initialise room exits
         //salidas entrada
@@ -102,8 +104,9 @@ public class Game
                 
         //salida salida
         salida.setExit("east", corredor);
-
-        currentRoom = entrada;  // start game outside
+        
+        
+        player.setRoom(entrada);  // start game outside
          
     }
 
@@ -135,7 +138,8 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println("You are " + currentRoom.getDescription());
+        System.out.println("You are " );
+        player.lookRoom();
         System.out.print("Exits: ");
        
         System.out.println();
@@ -169,24 +173,24 @@ public class Game
         }
         else if(commandWord.equals("look"))
         {
-            look();
+            player.lookRoom();
         }
         else if(commandWord.equals("eat"))
         {
-            eat();
+            player.eat();
         }
         else if(commandWord.equals("back"))
         {
-           if( room.empty()==true)
-           {
-               System.out.println(" NO HAY MAS HABITACIONES SE ENCUENTRA EN EL INICIO DEL JUEGO");
-           }
-           else
-           {
-               currentRoom = room.pop();
-               
-           }
-            look();
+            player.backRoom();
+            player.lookRoom();
+        }
+        else if(commandWord.equals("take"))
+        {
+            player.take();
+        }
+        else if(commandWord.equals("drop"))
+        {
+            player.drop();
         }
 
         return wantToQuit;
@@ -209,35 +213,7 @@ public class Game
        parser.showCommands();
     }
 
-    /** 
-     * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
-     */
-    private void goRoom(Command command) 
-    {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-       
-
-        Room nextRoom = currentRoom.getExit(direction);
-        
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            room.push(currentRoom);
-            currentRoom = nextRoom;
-            
-           printLocationInfo();
-        }
-    }
+   
 
     /** 
      * "Quit" was entered. Check the rest of the command to see
@@ -255,21 +231,15 @@ public class Game
         }
     }
     
-    private void look()
+   private void goRoom(Command command)
     {
-        printLocationInfo();
-    }
-    
-    private void eat()
-    {
-        System.out.println("you have eaten now and you not hungry any more");
-    }
-    
-    private void printLocationInfo()
-    {
-        System.out.println(currentRoom.getLongDescription());
-        
-        
-        System.out.println();
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Go where?");
+            return;
+        }
+
+        player.goRoom(command.getSecondWord());
+        player.lookRoom();
     }
 }
